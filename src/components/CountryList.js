@@ -1,14 +1,20 @@
 import '../App.css';
 import React, {useEffect, useState} from "react";
 
-const Country = (country, day) => {
-    const [data, setdata] = useState({});
+const CountryList = (data0) => {
+    const [data1, setdata] = useState([]);
     const [loading, setloading] = useState(true);
-    const [details, setdetails] = useState(false);    
+    const [details, setdetails] = useState(false);
+
+    if(data0.data0===''){
+        var url="https://covid-193.p.rapidapi.com/statistics";
+    } else {
+        url="https://covid-193.p.rapidapi.com/statistics?country="+data0.data0;;
+    }
+    
+    
 
     useEffect(()=>{
-        const url="https://covid-193.p.rapidapi.com/history?country="+country.country+"&day="+country.day;
-        
         fetch(url, {
             "method": "GET",
             "headers": {
@@ -19,14 +25,16 @@ const Country = (country, day) => {
         .then(response => {
             var p = Promise.resolve(response.json());
             p.then((value) => {
-                setdata(value.response[0]);
+                if(data1.length === 0){
+                    setdata(value.response[0]);
+                    setdata(data1.sort(function(a, b){return a.cases.total-b.cases.total}));
+                }
             })
         })
         .catch(err => {
             console.error(err);
         })
         .finally(()=>{
-            //console.log(data);
             setloading(false);
         });
     })
@@ -52,7 +60,17 @@ const Country = (country, day) => {
         : 
         <>
         <div className='App'>
-                <div className='data' >
+            {
+                data1.map((data)=>{
+                    <div style={
+                        {
+                         border: '2px solid',
+                         align: 'center',
+                         color: "#635353"
+                        }
+                      }>
+                    <div className='App'>
+                    <div className='data' >
                     <h2 style={hStyle}>Name: {data.country}</h2><br></br>
                     <label style={inputStyle}>New Cases: {data.cases.new}</label><br></br>
                     <label style={inputStyle}>New Deaths: {data.deaths.new}</label><br></br>
@@ -79,12 +97,20 @@ const Country = (country, day) => {
                         :
                         <button style={inputStyle} onClick={() => setdetails(true)}>Load Details</button>
                     }
-                </div>
+                    </div>
+                    </div>
+                
+                    </div>
+
+                    })
+                
+            }
         </div>
         </>
+        
         }
         </>
     )
 }
 
-export default Country;
+export default CountryList;

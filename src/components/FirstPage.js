@@ -12,10 +12,20 @@ const FirstPage = () => {
         fontSize: "30px"
     };
 
+    const hStyle = {
+        color: "#635353",
+        fontSize: "60px"
+    };
+
     return(
         <div className='App'>
-            <h1>COVID Info</h1>
+            <br></br>
+            <br></br>
+            <h1 style={hStyle}>COVID Info</h1>
             <button style={buttonStyle} onClick={() => {navigate("/history")}}>History</button>
+            <br></br>
+            <br></br>
+            <button style={buttonStyle} onClick={() => {navigate("/statistics")}}>Statistics</button>
         </div>
     )
 }
