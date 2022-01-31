@@ -26,7 +26,7 @@ const CountryList = (data0) => {
             var p = Promise.resolve(response.json());
             p.then((value) => {
                 if(data1.length === 0){
-                    setdata(value.response[0]);
+                    setdata(value.response);
                     setdata(data1.sort(function(a, b){return a.cases.total-b.cases.total}));
                 }
             })
@@ -62,6 +62,7 @@ const CountryList = (data0) => {
         <div className='App'>
             {
                 data1.map((data)=>{
+                    
                     <div style={
                         {
                          border: '2px solid',
