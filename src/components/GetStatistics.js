@@ -7,6 +7,7 @@ const GetStatistics = (props) => {
     const [singleCountry, setCountry] = useState({})
     const [loading, setloading] = useState(true);
     const [isCountry, setIsCountry] = useState(false);
+    var divKey = 0;
 
     if(props.country===''){
         var url="https://covid-193.p.rapidapi.com/statistics";
@@ -41,12 +42,9 @@ const GetStatistics = (props) => {
             })
         })
         .catch(err => {
-            console.log(singleCountry);
             console.error(err);
         })
         .finally(()=>{
-            console.log(singleCountry);
-            console.log(data);
             setloading(false);
         });
     }, [data]);
@@ -80,7 +78,6 @@ const GetStatistics = (props) => {
                         return(
                             <>
                                 <div key={index}>
-                                    {console.log(country)}
                                     <Country data={country}/>
                                 </div>
                             </>
