@@ -79,6 +79,7 @@ const GetStatistics = (props) => {
                             <>
                                 <div key={index}>
                                     <Country data={country}/>
+                                    <br></br><br></br><br></br>
                                 </div>
                             </>
                         )
