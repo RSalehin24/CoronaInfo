@@ -39,7 +39,7 @@ const Country = (props) => {
                             <br></br><br></br><br></br>
                             <label style={inputStyle}>Date and Time: {props.data.time}</label>
                             <br></br><br></br><br></br>
-                            <button style={inputStyle} onClick={() => setdetails(false)}>hide Details</button>
+                            <button style={inputStyle} onClick={() => setdetails(false)}>Hide Details</button>
                             <br></br><br></br><br></br>
                         </>
                         :
