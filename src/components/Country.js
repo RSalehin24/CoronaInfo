@@ -1,37 +1,9 @@
 import '../App.css';
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 
-const Country = (country, day) => {
-    const [data, setdata] = useState({});
-    const [loading, setloading] = useState(true);
-    const [details, setdetails] = useState(false);    
+const Country = (props) => {
+    const [details, setdetails] = useState(false);
 
-    useEffect(()=>{
-        const url="https://covid-193.p.rapidapi.com/history?country="+country.country+"&day="+country.day;
-        
-        fetch(url, {
-            "method": "GET",
-            "headers": {
-                "x-rapidapi-host": "covid-193.p.rapidapi.com",
-                "x-rapidapi-key": "db900dc2a4msh9f79fe5058efa60p1c6f9bjsnc395558a0672"
-            }
-        })
-        .then(response => {
-            var p = Promise.resolve(response.json());
-            p.then((value) => {
-                setdata(value.response[0]);
-            })
-        })
-        .catch(err => {
-            console.error(err);
-        })
-        .finally(()=>{
-            //console.log(data);
-            setloading(false);
-        });
-    })
-
-    
     const inputStyle = {
         color: "#635353",
         fontSize: "20px"
@@ -41,48 +13,40 @@ const Country = (country, day) => {
     }
 
     return(
-        <>
-        { loading? 
+        
         <>
             <div className='App'>
-                <br></br><br></br>
-                <h2 style={hStyle}> Loading data ...</h2> 
-            </div>
-        </>
-        : 
-        <>
-        <div className='App'>
                 <div className='data' >
-                    <h2 style={hStyle}>Name: {data.country}</h2><br></br>
-                    <label style={inputStyle}>New Cases: {data.cases.new}</label><br></br>
-                    <label style={inputStyle}>New Deaths: {data.deaths.new}</label><br></br>
-                    <label style={inputStyle}>Date: {data.day}</label>
+                    <h2 style={hStyle}>Name: {props.data.country}</h2><br></br>
+                    <label style={inputStyle}>New Cases: {props.data.cases.new}</label><br></br>
+                    <label style={inputStyle}>New Deaths: {props.data.deaths.new}</label><br></br>
+                    <label style={inputStyle}>Date: {props.data.day}</label>
                     <br></br><br></br>
                     {
                         details ? 
                         <>
                             <h3 style={hStyle}>Cases:</h3>
-                            <label style={inputStyle}>Active: {data.cases.active}</label><br></br>
-                            <label style={inputStyle}>Critical: {data.cases.critical}</label><br></br>
-                            <label style={inputStyle}>Recovered: {data.cases.recovered}</label><br></br>
-                            <label style={inputStyle}>Total: {data.cases.total}</label><br></br>
+                            <label style={inputStyle}>Active: {props.data.cases.active}</label><br></br>
+                            <label style={inputStyle}>Critical: {props.data.cases.critical}</label><br></br>
+                            <label style={inputStyle}>Recovered: {props.data.cases.recovered}</label><br></br>
+                            <label style={inputStyle}>Total: {props.data.cases.total}</label><br></br>
                             <br></br>
                             <h3 style={hStyle}>Deaths:</h3>
-                            <label style={inputStyle}>Total: {data.deaths.total}</label><br></br>
+                            <label style={inputStyle}>Total: {props.data.deaths.total}</label><br></br>
                             <br></br>
                             <h3 style={hStyle}>Tests:</h3>
-                            <label style={inputStyle}>Total: {data.tests.total}</label>
+                            <label style={inputStyle}>Total: {props.data.tests.total}</label>
                             <br></br><br></br><br></br>
-                            <label style={inputStyle}>Date and Time: {data.time}</label>
+                            <label style={inputStyle}>Date and Time: {props.data.time}</label>
+                            <br></br><br></br><br></br>
+                            <button style={inputStyle} onClick={() => setdetails(false)}>hide Details</button>
                             <br></br><br></br><br></br>
                         </>
                         :
                         <button style={inputStyle} onClick={() => setdetails(true)}>Load Details</button>
                     }
                 </div>
-        </div>
-        </>
-        }
+            </div>
         </>
     )
 }

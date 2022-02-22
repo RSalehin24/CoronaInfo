@@ -1,6 +1,6 @@
 import '../App.css';
 import React, {useState} from "react";
-import Country from './Country';
+import GetHistory from './GetHistory';
 
 const History = () => {
 
@@ -19,7 +19,7 @@ const History = () => {
         fontSize: "18px"
     }
 
-    const [day, setday] = useState('2022-01-31');
+    const [day, setday] = useState('2022-02-22');
     const [country, setcountry] = useState('');
     const [click, setclick] = useState(false);
     
@@ -54,7 +54,7 @@ const History = () => {
                 <br></br><br></br><br></br>
                 <div className='App'>
                     <h1 style={h3Style}>History</h1><br></br>
-                    <Country country={country} day={day}/>
+                    <GetHistory country={country} day={day}/>
                 </div>
 
             </>

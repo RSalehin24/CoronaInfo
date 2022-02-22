@@ -1,6 +1,6 @@
 import '../App.css';
 import React, {useState} from "react";
-import CountryList from './CountryList';
+import GetStatistics from './GetStatistics';
 
 const Statistics = () => {
 
@@ -43,13 +43,12 @@ const Statistics = () => {
                     </form>
                 </div>  
             </div>
-
             :
             <>
                 <br></br><br></br><br></br>
                 <div className='App'>
                     <h1 style={h3Style}>Statistics</h1><br></br>
-                    <CountryList data0={country}/>
+                    <GetStatistics country={country}/>
                 </div>
             </>
             
